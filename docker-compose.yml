@@ -1,0 +1,14 @@
+services:
+  api:
+    build: .
+    container_name: online-judge-api
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql://postgres.qzvnkarddfsokofrybqi:e4V137C6ojgezsC6@aws-0-ap-southeast-1.pooler.supabase.com:5432/postgres?sslmode=disable
+      SANDBOX_WORKDIR: ${OJ_SANDBOX_HOST_DIR:-/tmp/online-judge-submissions}
+    ports:
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${OJ_SANDBOX_HOST_DIR:-/tmp/online-judge-submissions}:${OJ_SANDBOX_HOST_DIR:-/tmp/online-judge-submissions}
