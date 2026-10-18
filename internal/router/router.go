@@ -16,7 +16,8 @@ func New(cfg config.Config, h *handler.Handler) *gin.Engine {
 		gin.SetMode(gin.ReleaseMode)
 	}
 	r := gin.New()
-	r.Use(gin.Logger(), gin.Recovery(), cors(cfg.FrontendOrigins))
+	r.Use(middleware.CORSMiddleware())
+	r.Use(gin.Logger(), gin.Recovery())
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(200, gin.H{"status": "ok", "service": "online-judge-lite-api", "time": time.Now().UTC()})
 	})
