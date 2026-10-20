@@ -51,10 +51,14 @@ func New(cfg config.Config, h *handler.Handler) *gin.Engine {
 	auth.GET("/problem-groups", h.ListGroups)
 	auth.GET("/problem-groups/:id", h.GetGroup)
 	auth.GET("/problems/:id", h.GetProblem)
+
+	auth.POST("/run", h.RunCode)
+
 	auth.POST("/submissions", h.CreateSubmission)
 	auth.GET("/submissions/me", h.ListMySubmissions)
 	auth.GET("/submissions/:id", h.GetSubmission)
 	auth.GET("/scoreboards/groups/:group_id", h.Scoreboard)
+
 
 	return r
 }

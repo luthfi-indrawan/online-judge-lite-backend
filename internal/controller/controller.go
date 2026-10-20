@@ -2,6 +2,7 @@ package controller
 
 import (
 	"online-judge-lite-backend/internal/config"
+	"online-judge-lite-backend/internal/runner"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -13,10 +14,11 @@ type Controller struct {
 	DB     *pgxpool.Pool
 	Config config.Config
 	Queue  chan int
+	Runner *runner.Runner
 }
 
 func New(db *pgxpool.Pool, cfg config.Config, queue chan int) *Controller {
-	return &Controller{DB: db, Config: cfg, Queue: queue}
+	return &Controller{DB: db, Config: cfg, Queue: queue , Runner: runner.New(cfg)}
 }
 func (ctl *Controller) makeToken(id int, username, role string) (string, error) {
 	now := time.Now()

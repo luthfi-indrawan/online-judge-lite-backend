@@ -25,3 +25,4 @@ func (h *Handler) CreateSubmission(c *gin.Context)  { h.C.CreateSubmission(c) }
 func (h *Handler) GetSubmission(c *gin.Context)     { h.C.GetSubmission(c) }
 func (h *Handler) ListMySubmissions(c *gin.Context) { h.C.ListMySubmissions(c) }
 func (h *Handler) Scoreboard(c *gin.Context)        { h.C.Scoreboard(c) }
+func (h *Handler) RunCode(c *gin.Context) { h.C.RunCode(c) }
