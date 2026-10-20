@@ -242,6 +242,8 @@ func (p *WorkerPool) runCase(ctx context.Context, id int, pr problem, tc testcas
 		return result{verdict: "RTE", duration: elapsed, output: "Program did not produce readable output"}
 	}
 
+	println(normalize(string(outBytes))) 
+	println(normalize(tc.expected)) 
 	if normalize(string(outBytes)) != normalize(tc.expected) {
 		return result{verdict: "WA", duration: elapsed, output: fmt.Sprintf("Wrong answer on test case #%d", index+1)}
 	}
@@ -262,7 +264,7 @@ func (p *WorkerPool) finish(ctx context.Context, id int, verdict string, ms int,
 }
 
 func normalize(s string) string {
-	return strings.TrimSpace(strings.ReplaceAll(strings.ReplaceAll(s, "\r\n", "\n"), "\r", "\n"))
+	return strings.ReplaceAll(strings.ReplaceAll(s, "\r\n", "\n"), "\r", "\n")
 }
 
 func limit(s string, n int) string {
